@@ -4,6 +4,7 @@
   "description": "Welcome to Leaf Laugh Love, a community of plants lovers just looking to have a good time.",
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.22.10",
     "@babel/runtime": "^7.22.10",
@@ -15,6 +16,7 @@
     "express": "^4.18.2",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

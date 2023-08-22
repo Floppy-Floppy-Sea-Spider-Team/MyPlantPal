@@ -1,7 +1,7 @@
 /**
  * ************************************
  *
- * @module userController 
+ * @module userController
  * @authors Preston Coldwell, John Le, Christopher Le, Geoffrey Sun, Brandon Chmiel
  * @date 08/18/2023
  * @description Controls authenticating and tracking user details and passwords
@@ -9,8 +9,8 @@
  * ************************************
  */
 
-const cookieParser = require('cookie-parser');
-const User = require('../models/userModel');
+import cookieParser from 'cookie-parser';
+import User from '../models/userModel.js';
 
 const userController = {};
 
@@ -76,13 +76,13 @@ userController.setSSIDCookie = async (req, res, next) => {
       log: `userController.setSSIDCookie ERROR : ${err}`,
       message : {
         err : 'userController.setSSIDCookie ERROR'
-      }    
+      }
     })
   }
 }
 
 /**
- * @name userController.getSSIDCookie 
+ * @name userController.getSSIDCookie
  * @description Retrieves the user's SSID cookie and saves it to res.locals.id
  */
 userController.getSSIDCookie = async (req, res, next) => {
@@ -95,7 +95,7 @@ userController.getSSIDCookie = async (req, res, next) => {
       log: `userController.getSSID ERROR : ${err}`,
       message : {
         err : 'userController.getSSID ERROR'
-      }  
+      }
     })
   }
 }
@@ -103,7 +103,7 @@ userController.getSSIDCookie = async (req, res, next) => {
 /**
  * @name userController.deleteUser
  * @description retrieves the user id and removes it from MongoDB
- * TODO: 
+ * TODO:
  */
 userController.deleteUser = async (req, res, next) => {
 
@@ -118,4 +118,4 @@ userController.updateUser = async (req, res, next) => {
 
 }
 
-module.exports = userController;
+export default userController;
