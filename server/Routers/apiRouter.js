@@ -20,16 +20,16 @@ import apiController from '../Controllers/apiController.js';
  * @description Gets the plant list from third-party API
  */
 
-apiRouter.get('/plants', apiController.getPlantList, (req, res) => {
-  return res.status(200).send(res.locals.plants);
-})
+// apiRouter.get('/plants', apiController.getPlantList, (req, res) => {
+//   return res.status(200).send(res.locals.plants);
+// })
 
 /**
  * @name apiRouter-GetPlantInfo
  * @description Grabs plant information from third-party API
  */
 
-apiRouter.get('/plants/:id', apiController.getPlantInfo, (req, res) => {
+apiRouter.get('/plant/:q', apiController.getPlantInfo, (req, res) => {
   return res.status(200).send(res.locals.plant);
 })
 
