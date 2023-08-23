@@ -21,7 +21,12 @@ import CreatePlant from './containers/NewPlantContainer.jsx';
 
 //The relevant routes to direct every part of the program
 
+
 const App = () => {
+
+  //need to make a fetch call to the API to instantiate initial state with plant data
+  
+
   return (
     <div>
       <BrowserRouter>

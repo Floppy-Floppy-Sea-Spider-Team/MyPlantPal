@@ -13,10 +13,19 @@ import { combineReducers } from 'redux';
 
 // import all reducers here
 import plantReducer from './plantReducers.js';
+import apiReducer from './APIReducers.js';
+
+// //combine initial states
+// const initialCombinedState = {
+//     APIdata: APIReducers(undefined, {})
+//     plantdata: plantReducers(undefined, {})
+// }
+
 
 // combine reducers
 const reducers = combineReducers({
   // if we had other reducers, they would go here
+  api: apiReducer,
   plants: plantReducer,
 });
 

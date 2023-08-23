@@ -33,12 +33,17 @@ const CreatePlantCard = props => {
   //Create the new plant
   const handleSubmission = (e) => {
     e.preventDefault(); 
-    // fire a post request to the backend
-    console.log('Submit Button clicked');
+    
+    //first use dispatch to call APIreducer
+    //click down instantiates with the different options from the API fetch returned to state
+    //client selects from click-down the specific plant they want
+    //we make an edit of the state to get rid of all other options in state and just leave the one we are interested in.  we also make aa useDispatch call to our plant reducer
+    
+
     const data = {
       name: name, 
       type: species,
-      soil: soilType, 
+      lastWatered: lastWater,
       frequency: waterFrequency, 
       photo: fileUrl
     };
