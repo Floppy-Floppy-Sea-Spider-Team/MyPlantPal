@@ -46,14 +46,19 @@ module.exports = {
       template: path.resolve(__dirname, './index.html'),
     }),
   ],
-  
+
   devServer: {
     static : {
       publicPath: '/build',
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
-      '/leaf': 'http://localhost:3000'
+      '/api': {
+        target: 'http://localhost:3000',
+      },
+      '/leaf': {
+        target: 'http://localhost:3000',
+      },
     }
   }
 };

@@ -12,7 +12,7 @@
 import { combineReducers } from 'redux';
 
 // import all reducers here
-import plantReducer from './plantReducers';
+import plantReducer from './plantReducers.js';
 
 // combine reducers
 const reducers = combineReducers({

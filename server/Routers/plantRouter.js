@@ -9,10 +9,12 @@
  * ************************************
  */
 
-const express = require('express');
+import express from 'express';
+
 const plantRouter = express.Router();
-const plantController = require('../Controllers/plantController')
-const userController = require('../Controllers/userController');
+
+import plantController from '../Controllers/plantController.js';
+import userController from '../Controllers/userController.js';
 
 /**
  * @name PlantRouter-GetPlant
@@ -33,7 +35,7 @@ plantRouter.post('/createplant', userController.getSSIDCookie, plantController.c
 /**
  * @name PlantRouter-UpdatePlant
  * @description Gets the plant information and lets the user modify certain parts of the plant information
- * Send that information back as a patch 
+ * Send that information back as a patch
  * TODO:
  */
 plantRouter.patch('', plantController.updatePlant, (req, res) => {
@@ -48,5 +50,4 @@ plantRouter.delete('/deleteplant', userController.getSSIDCookie, plantController
   return res.status(200).send(res.locals.data);
 })
 
-module.exports = plantRouter; 
-
+export default plantRouter;
