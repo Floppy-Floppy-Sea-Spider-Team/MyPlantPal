@@ -48,9 +48,10 @@ userController.login = async (req, res, next) => {
  * @description Creates a user and adds them to MongoDB
  */
 userController.createUser = async (req, res, next) => {
+  console.log(req.body)
   try {
     const { username, password } = req.body;
-    const data = await User.create({ username : username, password : password });
+    const data = await User.create({ username: username, password: password });
     res.locals.data = data;
     return next();
   } catch (err) {
