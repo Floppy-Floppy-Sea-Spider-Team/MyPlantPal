@@ -32,15 +32,15 @@ const CreatePlantCard = props => {
 
   //Create the new plant
   const handleSubmission = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     // fire a post request to the backend
     console.log('Submit Button clicked');
     const data = {
-      name: name, 
+      name: name,
       type: species,
-      soil: soilType, 
-      frequency: waterFrequency, 
-      photo: fileUrl
+      soil: soilType,
+      frequency: waterFrequency,
+      // photo: fileUrl
     };
     console.log(data);
 // Process a fetch request to the server side to create the new schema, then when finished return to the home page
@@ -57,7 +57,7 @@ const CreatePlantCard = props => {
   }
 
 
-  // Upon successfully creating a plant return the user back to the home page 
+  // Upon successfully creating a plant return the user back to the home page
   const toHome = () => {
     let path = "/home";
     navigate(path);
@@ -69,7 +69,7 @@ const CreatePlantCard = props => {
       let path = '/create';
       navigate(path);
   }
-  // Create the react component 
+  // Create the react component
   return (
     <div className = 'createPlantCard'>
       <header className = 'createCardHeader'>
@@ -81,7 +81,7 @@ const CreatePlantCard = props => {
             {name}
           </span>
         </div>
-        
+
       </header>
       <section className = 'inputField'>
         <div className='photoInput'>
@@ -137,7 +137,7 @@ const CreatePlantCard = props => {
             onClick = {handleSubmission}
           >Add New Plant</button>
         </div>
-      </section>  
+      </section>
     </div>
   );
 };
