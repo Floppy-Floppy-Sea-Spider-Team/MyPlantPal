@@ -18,7 +18,7 @@ const SignUp = () => {
     navigate(path);
   };
 
-  //Similar and relevant function to the Sign-in. Could refactor to modularize and set the repeated parts as their own file and paths instead of rewriting them. 
+  //Similar and relevant function to the Sign-in. Could refactor to modularize and set the repeated parts as their own file and paths instead of rewriting them.
   const handleClick = async () => {
     try{
       const body = {
@@ -27,7 +27,7 @@ const SignUp = () => {
       }
 
       //Call the create user post function server side
-      const data = await fetch(`http://localhost:8080/leaf/user/createuser`, {
+      const data = await fetch(`http://localhost:8080/leaf/user/createUser`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -39,7 +39,7 @@ const SignUp = () => {
     } catch(err){
       console.log(err);
     }
-    
+
   }
 
   const goHome = () => {
