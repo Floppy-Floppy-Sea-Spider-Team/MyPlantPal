@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PlantCard from './PlantCard.jsx';
+import {loadAllPlantsActionCreator} from '../actions/actions.js'
 
 //Main function to render the plant display box
 const PlantDisplay = () => {

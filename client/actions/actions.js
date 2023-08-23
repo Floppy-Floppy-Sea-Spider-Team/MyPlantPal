@@ -31,8 +31,8 @@ export const fetchApiDataActionCreator = (species) => ({
   },
 });
 
-export const fetchPlantActionCreator =  (species) => ({
+export const fetchPlantActionCreator =  (dataArray) => ({
   type: types.FETCH_PLANT, payload: {
-    species: species,
+    data: dataArray,
   }
 })

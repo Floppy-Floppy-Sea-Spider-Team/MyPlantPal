@@ -13,6 +13,8 @@
 import React from 'react';
 const PlantCard = (props) => {
 
+  let currPlants=useSelector(state=>state.plantList)
+
   //Take in and deconstruct the relevant props from the plant display to create the indivual card components
   const { plantName, species, lastWatered, frequency, soil, lastPotted, sunlight, dateAdded/*, photo */} = props; //photo currently doesn't work
 

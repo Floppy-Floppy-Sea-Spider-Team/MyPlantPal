@@ -30,7 +30,17 @@ const CreatePlantCard = (props) => {
   //Create the new plant
   const handleSubmission = (e) => {
     e.preventDefault();
-    dispatch(fetchApiDataActionCreator(e.target.parentNode[1].value));
+    const species=e.target.parentNode[1].value
+    const apiAsyncData = async (species) => {
+      try {
+        const response = await fetch(`/api/plants/${species}`);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.log('Error fetch API data');
+      }
+    }
+    dispatch(fetchPlantActionCreator(apiAsyncData));
   };
 
   // Upon successfully creating a plant return the user back to the home page
@@ -39,11 +49,11 @@ const CreatePlantCard = (props) => {
     navigate(path);
   };
 
-  // If you click on the link of the page redirect back to same page
-  const toCreate = () => {
-    let path = '/create';
-    navigate(path);
-  };
+  // // If you click on the link of the page redirect back to same page
+  // const toCreate = () => {
+  //   let path = '/create';
+  //   navigate(path);
+  // };
 
   const selectSpecies = (e) => {
     //apireducer to get rid of species not chosen
@@ -102,7 +112,7 @@ const CreatePlantCard = (props) => {
       <div className="createInput">
         <select name="species" onClick={selectSpecies}>
           {apiData.map((element, index) => (
-            <option key={index} value={element.scientific_name}>
+            <option key={index} value={element.scientific_name} >
               {element.scientific_name}
             </option>
           ))}

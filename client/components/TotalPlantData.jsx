@@ -14,21 +14,13 @@ import { useSelector } from 'react-redux';
 
 //Display the plant data 
 const TotalPlantData = () => {
-  //This state will display how many plants owned by the user, currently incorrectly styled for redux before abandoned redux. Will need to be restructured to fit current style
-  const totalCards = useSelector((store) => store.plants.totalCards);
-  //Also defunct, restructured to plant display 
-  const plantList = useSelector((store) => store.plants.plantList);
-  //Was created with intention of assigning plants a score based on how difficult to raise the plants were, never established. 
-  const greenScore = useSelector((store) => store.plants.greenScore);
+  const totalCards = useSelector((state) => state.plants.totalPlants);
 
-  //Hard coding testing of the different parts
   return (
     <div className="totalPlantDataBox">
       <div className="totalPlantData">
-        {/* Total Plants: {totalCards} */}
-        Total Plants: 12345
+         Total Plants:  {totalCards}
       </div>
-      <div className="totalPlantData">Green Score: {greenScore}</div>
       <div className="totalPlantData">Filter Plants</div>
     </div>
   );
