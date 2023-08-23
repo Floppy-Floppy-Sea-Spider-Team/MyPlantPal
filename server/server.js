@@ -9,15 +9,20 @@
  * ************************************
  */
 
-const path = require('path');
-const express = require('express');
+import path from 'path';
+import express from 'express';
+
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoose = require('mongoose');
-const userRouter = require('./Routers/userRouter');
-const plantRouter = require('./Routers/plantRouter');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser')
+
+import mongoose from 'mongoose';
+
+import userRouter from './Routers/userRouter.js';
+import plantRouter from './Routers/plantRouter.js';
+import apiRouter from './Routers/apiRouter.js';
+
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -25,10 +30,13 @@ dotenv.config();
  * @name
  * @description handles the npm node environments for starting server
  */
+
+const currentDir = path.dirname(new URL(import.meta.url).pathname);
+
 if (process.env.NODE_ENV === 'production') {
-  app.use('/build', express.static(path.join(__dirname, '../build')));
+  app.use('/build', express.static(path.join(currentDir, '../build')));
   app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+    return res.status(200).sendFile(path.join(currentDir, '../index.html'));
   });
 }
 
@@ -37,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
  * @description Link to Mongoose database;
  * Currently unsure how to handle accessing two different db's (Plant/Person)
  */
-const MONGO_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@plantdb.5rwujf8.mongodb.net/`;
+const MONGO_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@mydb.qkjprsc.mongodb.net/?retryWrites=true&w=majority`;
 mongoose
   .connect(MONGO_URI, {
     // options for the connect method to parse the URI
@@ -60,6 +68,7 @@ app.use(cookieParser());
  * @name
  * @description Setting up routers
  */
+app.use('/api', apiRouter);
 app.use('/leaf/user', userRouter);
 app.use('/leaf/plant', plantRouter);
 
@@ -88,4 +97,4 @@ app.listen(port, () => {
   console.log(`Server listening on port: ${port}...`);
 });
 
-module.exports = app;
+export default app;

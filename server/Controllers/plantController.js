@@ -9,15 +9,14 @@
  * ************************************
  */
 
-const Plant = require('../models/plantModel');
-const User = require('../models/userModel');
-const { request } = require('../server');
+import Plant from '../models/plantModel.js';
+import User from '../models/userModel.js';
 
 const plantController = {};
 
 /**
- * @name plantController.getPlants 
- * @description Grabs plant information from the database 
+ * @name plantController.getPlants
+ * @description Grabs plant information from the database
  */
 plantController.getPlants = async (req, res, next) => {
   try {
@@ -29,7 +28,7 @@ plantController.getPlants = async (req, res, next) => {
       log: `plantController.getPlants ERROR : ${err}`,
       message : {
         err : 'plantController.getPlants ERROR wrong input'
-      }    
+      }
     })
   }
 }
@@ -40,7 +39,7 @@ plantController.getPlants = async (req, res, next) => {
  */
 plantController.createPlant = async (req, res, next) => {
   try {
-    const { body } = req; 
+    const { body } = req;
 
     body.user = res.locals.id;
     const data = await Plant.create(body);
@@ -57,7 +56,7 @@ plantController.createPlant = async (req, res, next) => {
       log: `plantController.createPlant ERROR : ${err}`,
       message : {
         err : 'plantController.createPlant ERROR wrong input'
-      }    
+      }
     })
   }
 }
@@ -77,7 +76,7 @@ plantController.deletePlant = async (req, res, next) => {
       log: `plantController.deletePlant ERROR : ${err}`,
       message : {
         err : 'plantController.deletePlant ERROR'
-      }    
+      }
     })
   }
 }
@@ -89,17 +88,16 @@ plantController.deletePlant = async (req, res, next) => {
  */
 plantController.updatePlant = async (req, res, next) => {
   try {
-    
-    return next(); 
+
+    return next();
   } catch (err) {
     return next({
       log: `plantController.updatePlant ERROR : ${err}`,
       message : {
         err : 'plantController.updatePlant ERROR'
-      }    
+      }
     })
   }
 }
 
-module.exports = plantController;
-
+export default plantController;

@@ -9,14 +9,16 @@
  * ************************************
  */
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
-const User = require('./userModel')
+
+import User from './userModel.js';
 
 /**
  * @name plantSchema
  * @description Schema for plants
- * requires a name... currently name, type, and user works; 
+ * requires a name... currently name, type, and user works;
  * TODO: add funcitonality to other parts of Schema
  *  Plants are currently UNIQUE per DATABASE... Goal -> Unique per User
  *  Photos need to be added... type is NOT Image
@@ -29,10 +31,10 @@ const plantSchema = new Schema({
   soil: { type: String },
   lastPotted: { type: Date },
   sunlight: { type: String },
-  // photo: { type: Image }, // currently doesn't work 
+  // photo: { type: Image }, // currently doesn't work
   dateAdded: { type: Date },
   // birthday: { type: Date }, // just a joke
-  user: { 
+  user: {
     type : Schema.Types.ObjectId,
     ref: 'User',
     required : true
@@ -41,4 +43,4 @@ const plantSchema = new Schema({
 
 const Plant = mongoose.model('Plant', plantSchema);
 
-module.exports = Plant;
+export default Plant;

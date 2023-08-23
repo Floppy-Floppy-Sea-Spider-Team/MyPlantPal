@@ -9,19 +9,21 @@
  * ************************************
  */
 
-const express = require('express');
+import express from 'express';
+
 const userRouter = express.Router();
-const userController = require('../Controllers/userController');
-const plantController = require('../Controllers/plantController');
+
+import userController from '../Controllers/userController.js';
+import plantController from '../Controllers/plantController.js';
 
 /**
  * @name userRouter.get
  * @description Takes login data and sends to userController.login express middleware to verify authenticity
- * If authentic, sets an SSID cookie and then gets plants. 
+ * If authentic, sets an SSID cookie and then gets plants.
  */
 userRouter.post('/login', userController.login, userController.setSSIDCookie, plantController.getPlants, (req, res) => {
   if (res.locals.success) {
-    return res.status(200).send(res.locals.data); 
+    return res.status(200).send(res.locals.data);
   }
   else {
     return res.status(400).send('Unsuccessful Login.');
@@ -54,5 +56,4 @@ userRouter.delete('/deleteUser', userController.deleteUser, (req, res) => {
   return res.status(400);
 });
 
-module.exports = userRouter; 
-
+export default userRouter;
