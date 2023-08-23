@@ -20,7 +20,7 @@ const PlantCard = (props) => {
     <div className="plantBox">
       <div className="photoAndInfoTag">
         <div className="plantPhoto">
-          {/* <img src={photo} alt="" /> */}
+          {<img src={photo} alt="" />}
         </div>
         <div className="plantName">{plantName}</div>
       </div>
@@ -29,7 +29,7 @@ const PlantCard = (props) => {
         <div className='plantDetail'>Species: {species}</div>
         <div className='plantDetail'>Last Watered: {lastWatered}</div>
         <div className='plantDetail'>Frequency: {frequency}</div>
-        <div className='plantDetail'>Soil: {soil}</div>
+        <div className='plantDetail'>Grow Cycle: {cycle}</div>
         <div className='plantDetail'>Last Potted: {lastPotted}</div>
         <div className='plantDetail'>Sunlight: {sunlight}</div>
         <div className='plantDetail'>Date Added: {dateAdded}</div>

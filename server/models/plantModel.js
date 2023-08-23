@@ -25,15 +25,14 @@ import User from './userModel.js';
  */
 const plantSchema = new Schema({
   name: { type: String, required: true, unique: true },
-  type: { type: String },
+  species: { type: String },
   lastWatered: { type: Date },
   frequency: { type: Number },
-  soil: { type: String },
+  cycle: {type: String},
   lastPotted: { type: Date },
   sunlight: { type: String },
-  // photo: { type: Image }, // currently doesn't work
+  photo: { type: String },
   dateAdded: { type: Date },
-  // birthday: { type: Date }, // just a joke
   user: {
     type : Schema.Types.ObjectId,
     ref: 'User',

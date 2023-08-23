@@ -9,6 +9,7 @@
  * ************************************
  */
 
+//using import as nodefetch v2 that doesnt allow require
 import path from 'path';
 import express from 'express';
 
@@ -16,11 +17,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 import mongoose from 'mongoose';
-
 import userRouter from './Routers/userRouter.js';
 import plantRouter from './Routers/plantRouter.js';
 import apiRouter from './Routers/apiRouter.js';
-
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
@@ -30,13 +29,10 @@ dotenv.config();
  * @name
  * @description handles the npm node environments for starting server
  */
-
-const currentDir = path.dirname(new URL(import.meta.url).pathname);
-
 if (process.env.NODE_ENV === 'production') {
-  app.use('/build', express.static(path.join(currentDir, '../build')));
+  app.use('/build', express.static(path.join(__dirname, '../build')));
   app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(currentDir, '../index.html'));
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
   });
 }
 
@@ -76,7 +72,7 @@ app.use('/leaf/plant', plantRouter);
  * @name
  * @description Unknown route handler
  */
-// app.use((req, res) => res.status(404).send('Page not found'));
+app.use('*', (req, res) => res.status(404).send('This is an incorrect URL'));
 
 /**
  * @name

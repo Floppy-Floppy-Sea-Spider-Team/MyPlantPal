@@ -3,7 +3,6 @@ import * as types from '../constants/actionTypes.js';
 import {createAsyncThunk, createReducer} from '@reduxjs/toolkit'
 import { selectApiData } from './APIReducers.js';
 
-
 const initialState = {
   totalPlants: 0,
   plantList: [],
@@ -12,12 +11,13 @@ const initialState = {
 const plantsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(types.CREATE_PLANT, (state, action)=>{
-      totalPlants++;
+      state.plants.totalPlants++;
+      const apiData=selectApiData(state)
       const plant=apiData[0]
       const freq = plant.watering
       const cycle= plant.cycle
       const sunlight= plant.sunlight[0]
-      const url=plant.default_image.thumbnail,
+      const url=plant.default_image.thumbnail
       const species=plant.common_name
       const plantCard={
         name: action.payload.name,
@@ -29,16 +29,22 @@ const plantsReducer = createReducer(initialState, (builder) => {
         sunlight: sunlight,
         photo: url,
       }
-      plantList.push(plantCard)
+      state.plants.plantList.push(plantCard)
     })
-    .addCase(types.UPDATE_PLANT, (state, action)=>{
-
-
+    .addCase(types.LOAD_PLANT, (state, action)=>{
+      for (let i=0; i<action.payload.plants.length; i++){
+        state.plants.totalPlants++;
+        state.plants.plantList.push(action.payload.plants[i]);
+      }
     })
-    .addCase(types.DELETE_PLANT, (state, action)=>{
-      totalPlants--;
+    // .addCase(types.UPDATE_PLANT, (state, action)=>{
 
-    });
+
+    // })
+    // .addCase(types.DELETE_PLANT, (state, action)=>{
+    //   totalPlants--;
+
+    // });
  
  
  

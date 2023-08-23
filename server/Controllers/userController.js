@@ -23,13 +23,12 @@ const userController = {};
 userController.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const data = await User.find({username: username});
-    if (data[0].password === password){
+    const data = await User.find({ username: username });
+    if (data[0].password === password) {
       res.locals.id = data[0].id;
       res.locals.success = true;
-      return next()
-    }
-    else {
+      return next();
+    } else {
       res.locals.success = false;
       return next();
     }
@@ -49,9 +48,11 @@ userController.login = async (req, res, next) => {
  */
 userController.createUser = async (req, res, next) => {
   try {
+    console.log('request :', req.body);
     const { username, password } = req.body;
-    const data = await User.create({ username : username, password : password });
+    const data = await User.create({ username: username, password: password });
     res.locals.data = data;
+    console.log('response :', res.locals.data);
     return next();
   } catch (err) {
     return next({
@@ -74,12 +75,12 @@ userController.setSSIDCookie = async (req, res, next) => {
   } catch (err) {
     return next({
       log: `userController.setSSIDCookie ERROR : ${err}`,
-      message : {
-        err : 'userController.setSSIDCookie ERROR'
-      }
-    })
+      message: {
+        err: 'userController.setSSIDCookie ERROR',
+      },
+    });
   }
-}
+};
 
 /**
  * @name userController.getSSIDCookie
@@ -93,29 +94,25 @@ userController.getSSIDCookie = async (req, res, next) => {
   } catch (err) {
     return next({
       log: `userController.getSSID ERROR : ${err}`,
-      message : {
-        err : 'userController.getSSID ERROR'
-      }
-    })
+      message: {
+        err: 'userController.getSSID ERROR',
+      },
+    });
   }
-}
+};
 
 /**
  * @name userController.deleteUser
  * @description retrieves the user id and removes it from MongoDB
  * TODO:
  */
-userController.deleteUser = async (req, res, next) => {
-
-}
+userController.deleteUser = async (req, res, next) => {};
 
 /**
  * @name userController.updateUser
  * @description retrieves user information and updates MongoDB
  * TODO:
  */
-userController.updateUser = async (req, res, next) => {
-
-}
+userController.updateUser = async (req, res, next) => {};
 
 export default userController;

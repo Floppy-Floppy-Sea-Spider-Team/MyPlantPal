@@ -24,9 +24,7 @@ import CreatePlant from './containers/NewPlantContainer.jsx';
 
 const App = () => {
 
-  //need to make a fetch call to the API to instantiate initial state with plant data
   
-
   return (
     <div>
       <BrowserRouter>
@@ -35,7 +33,6 @@ const App = () => {
               <Route path='/signup' element={<SignUp />}></Route>
               <Route path='/home' element={<MainPage />}></Route>
               <Route path='/create' element={<CreatePlant />}></Route>
-              {/* <Route path='/update' element={<UpdateTool />}></Route> */}
           </Routes>
       </BrowserRouter>
     </div>
