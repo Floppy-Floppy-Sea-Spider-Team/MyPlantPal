@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import LoginNavBar from "../components/LoginNav-Bar.jsx";
 
 
-
-
 // HAVEN'T FULLY LINKED SIGN-UP!!
 
 const SignUp = () => {

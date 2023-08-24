@@ -18,23 +18,29 @@ import SignIn from './containers/SignIn.jsx';
 import SignUp from './containers/SignUp.jsx';
 import MainPage from './containers/MainPage.jsx';
 import CreatePlant from './containers/NewPlantContainer.jsx';
+import GitHubSignInButton from './components/GitHubSignInButton.jsx';
 
-//The relevant routes to direct every part of the program
 
 const App = () => {
+
   return (
     <div>
       <BrowserRouter>
-          <Routes>
-              <Route path='/' element={<SignIn />}></Route>
-              <Route path='/signup' element={<SignUp />}></Route>
-              <Route path='/home' element={<MainPage />}></Route>
-              <Route path='/create' element={<CreatePlant />}></Route>
-              {/* <Route path='/update' element={<UpdateTool />}></Route> */}
-          </Routes>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route
+            path="/github-signin"
+            element={<GitHubSignInButton />}
+          />
+          <Route path="/signup" element={<SignUp />} />
+          {/* Public routes */}
+          <Route path="/home" element={<MainPage />} />
+          <Route path="/create" element={<CreatePlant />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
 };
 
 export default App;
+
