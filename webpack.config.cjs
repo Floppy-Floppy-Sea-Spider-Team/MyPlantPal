@@ -54,8 +54,13 @@ module.exports = {
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
-      '/api': 'http://localhost:3000',
-      '/leaf': 'http://localhost:3000'
+
+      '/api': {
+        target: 'http://localhost:3000',
+      },
+      '/leaf': {
+        target: 'http://localhost:3000',
+      },
     }
   }
 };

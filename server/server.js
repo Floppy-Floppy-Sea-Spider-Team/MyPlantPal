@@ -9,80 +9,96 @@
  * ************************************
  */
 
-//using import as nodefetch v2 that doesnt allow require
-import path from 'path';
-import express from 'express';
+
+import path from "path";
+import express from "express";
+import mongoose from "mongoose";
+import userRouter from "./Routers/userRouter.js";
+import plantRouter from "./Routers/plantRouter.js";
+import apiRouter from "./Routers/apiRouter.js";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
+dotenv.config();
+
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-import mongoose from 'mongoose';
-import userRouter from './Routers/userRouter.js';
-import plantRouter from './Routers/plantRouter.js';
-import apiRouter from './Routers/apiRouter.js';
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
 
-dotenv.config();
 
-/**
- * @name
- * @description handles the npm node environments for starting server
- */
-if (process.env.NODE_ENV === 'production') {
-  app.use('/build', express.static(path.join(__dirname, '../build')));
-  app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+const currentDir = path.dirname(new URL(import.meta.url).pathname);
+
+if (process.env.NODE_ENV === "production") {
+  app.use("/build", express.static(path.join(currentDir, "../build")));
+  app.get("/", (req, res) => {
+    return res.status(200).sendFile(path.join(currentDir, "../index.html"));
   });
 }
 
-/**
- * @name mongoose.connect
- * @description Link to Mongoose database;
- * Currently unsure how to handle accessing two different db's (Plant/Person)
- */
 const MONGO_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@mydb.qkjprsc.mongodb.net/?retryWrites=true&w=majority`;
+
 mongoose
   .connect(MONGO_URI, {
-    // options for the connect method to parse the URI
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'test', // sets the name of the DB that our collections are part of
+    dbName: "test",
   })
-  .then(() => console.log('Connected to Mongo DB.'))
+  .then(() => console.log("Connected to Mongo DB."))
   .catch((err) => console.log(err));
 
-/**
- * @name
- * @description Parsing request body
- */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/**
- * @name
- * @description Setting up routers
- */
-app.use('/api', apiRouter);
-app.use('/leaf/user', userRouter);
-app.use('/leaf/plant', plantRouter);
+app.use("/api", apiRouter);
+app.use("/leaf/user", userRouter);
+app.use("/leaf/plant", plantRouter);
 
-/**
- * @name
- * @description Unknown route handler
- */
-app.use('*', (req, res) => res.status(404).send('This is an incorrect URL'));
+// Define a route for GitHub OAuth callback
+app.get("/github/callback", async (req, res) => {
+  const { code } = req.query;
 
-/**
- * @name
- * @description Global error handler w/ default handling
- */
+  try {
+    const { data } = await axios.post(
+      "https://github.com/login/oauth/access_token",
+      null,
+        {
+        params: {
+          client_id: process.env.GITHUB_CLIENT_ID,
+          client_secret: process.env.GITHUB_CLIENT_SECRET,
+          code,
+        },
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const accessToken = data.access_token;
+
+    res.cookie("authToken", accessToken, { httpOnly: true, secure: true });
+
+    console.log("GitHub OAuth success");
+    // res.redirect("http://localhost:8080"); // Redirect to /home after successful GitHub sign-in
+    res.status(200);
+  } catch (error) {
+    console.error("GitHub OAuth error:", error.message);
+    res.redirect("/error");
+  }
+});
+
+app.get("/auth", async (req, res) => {
+  console.log('auth endpoint hit');
+  res.status(202);
+
+})
+
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
+    log: "Express error handler caught unknown middleware error",
     status: 400,
-    message: { err: 'An error occurred' },
+    message: { err: "An error occurred" },
   };
   const errObj = Object.assign(defaultErr, err);
   console.log(errObj.log);
@@ -94,3 +110,4 @@ app.listen(port, () => {
 });
 
 export default app;
+

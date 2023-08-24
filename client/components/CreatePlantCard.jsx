@@ -51,6 +51,7 @@ const CreatePlantCard = (props) => {
     }
   };
 
+
   // Upon successfully creating a plant return the user back to the home page
   const toHome = () => {
     let path = '/home';
@@ -104,6 +105,7 @@ const CreatePlantCard = (props) => {
   request();
   toHome();
   };
+
 
 
   // Create the react component
@@ -166,6 +168,7 @@ const CreatePlantCard = (props) => {
           ))}
         </select>
       </div>
+
     </div>
   );
 };
