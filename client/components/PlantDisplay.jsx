@@ -1,24 +1,13 @@
-/**
- * ************************************
- *
- * @module PlantDisplay
- * @authors Preston Coldwell, John Le, Christopher Le, Geoffrey Sun, Brandon Chmiel
- * @date 08/18/2023
- * @description Take in the info from the database of all plants, use that to create the plant cards, then populate them onto the field
- *
- * ************************************
- */
 
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PlantCard from './PlantCard.jsx';
-import { useLocation, } from 'react-router-dom';
+import {loadAllPlantsActionCreator} from '../actions/actions.js'
 
 //Main function to render the plant display box
 const PlantDisplay = () => {
-
-  //Primary state of all of the users plants
-  const [plantArray, setPlantArray] = useState([])
-  
+  const dispatch=useDispatch()
   //One time on load of page render the users plants
   useEffect(() => {
     loadPlants();
@@ -30,16 +19,17 @@ const PlantDisplay = () => {
     try {
       const data = await fetch('http://localhost:8080/leaf/plant/getPlants')
       const totPlantList = await data.json(); 
-      setPlantArray(totPlantList);
+      dispatch((loadAllPlantsActionCreator(totPlantList)));
       } catch (error) {
         console.log(error);
       } 
     }
-//Use the map function to take each element of the plantArray state to go and create a card via the create card
+    let currPlants=useSelector(state=>state.plants.plantList)
+
   return (
     <div className='plantDisplay'>
-      {plantArray.map((plant) => (
-        <PlantCard key={plant.id} plantName={plant.name} species={plant.type} lastWatered={plant.lastWatered} frequency={plant.frequency} soil={plant.soil} lastPotted={plant.lastPotted} sunlight={plant.sunlight} dateAdded={plant.dateAdded} photo={plant.photo}/>
+      {currPlants.map((plant) => (
+        <PlantCard key={plant.id} plantName={plant.name} species={plant.species} lastWatered={plant.lastWatered} frequency={plant.frequency} cycle={plant.cycle} lastPotted={plant.lastPotted} sunlight={plant.sunlight}  photo={plant.photo}/>
       ))}
     </div>
   );

@@ -1,13 +1,4 @@
-/**
- * ************************************
- *
- * @module  Nav-Bar.jsx
- * @authors Preston Coldwell, John Le, Christopher Le, Geoffrey Sun, Brandon Chmiel
- * @date 08/18/2023
- * @description The modularized Nav-Bar to use as needed on individual pages
- *
- * ************************************
- */
+
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +26,8 @@ const NavBar = () => {
 
   //Enact sign out function to log out the currently logged out user
   const signOut = () => {
-    console.log('sign out');
+    let path = '/';
+    navigate(path);    
     // sign out functionality here
   };
 //return the rendering of the nav-bar 

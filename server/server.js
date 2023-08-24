@@ -9,6 +9,7 @@
  * ************************************
  */
 
+
 import path from "path";
 import express from "express";
 import mongoose from "mongoose";
@@ -20,8 +21,10 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 
+
 const app = express();
 const port = process.env.PORT || 3000;
+
 
 
 const currentDir = path.dirname(new URL(import.meta.url).pathname);

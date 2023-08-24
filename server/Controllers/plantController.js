@@ -38,11 +38,14 @@ plantController.getPlants = async (req, res, next) => {
  * @description Creates plant using information and adds to MongoDB
  */
 plantController.createPlant = async (req, res, next) => {
+  console.log('Creating plant...');
   try {
     const { body } = req;
 
     body.user = res.locals.id;
+    console.log('body', body)
     const data = await Plant.create(body);
+    console.log('data', data)
     res.locals.data = data;
 
     const plantId = data.id;

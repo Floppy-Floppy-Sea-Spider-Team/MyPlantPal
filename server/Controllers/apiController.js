@@ -41,7 +41,7 @@ const apiController = {};
 apiController.getPlantInfo = async (req, res, next) => {
   try {
     const { q } = req.params;
-    const plantInfoURI = `https://perenual.com/api/species-list?key=sk-Kmjg64e5170fef1611959&q=${q}`;
+    const plantInfoURI = `https://perenual.com/api/species-list?key=sk-jMoJ64e7b7b1e46551975&q=${q}`;
     const response = await fetch(plantInfoURI);
     const plantInfo = await response.json();
     res.locals.plant = plantInfo;

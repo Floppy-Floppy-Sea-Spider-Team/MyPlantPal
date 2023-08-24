@@ -21,8 +21,8 @@ import CreatePlant from './containers/NewPlantContainer.jsx';
 import GitHubSignInButton from './components/GitHubSignInButton.jsx';
 
 
-const App = () => {
 
+const App = () => {
   return (
     <div>
       <BrowserRouter>
