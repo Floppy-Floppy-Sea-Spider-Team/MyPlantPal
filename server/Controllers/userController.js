@@ -11,6 +11,7 @@
 
 import cookieParser from 'cookie-parser';
 import User from '../models/userModel.js';
+import bcrypt from 'bcrypt'
 
 const userController = {};
 
@@ -48,10 +49,20 @@ userController.login = async (req, res, next) => {
  * @description Creates a user and adds them to MongoDB
  */
 userController.createUser = async (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const { username, password } = req.body;
-    const data = await User.create({ username: username, password: password });
+
+    // Hash the password using bcrypt
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Create the user with the hashed password
+    const data = await User.create({
+      username: username,
+      password: hashedPassword,
+    });
+
     res.locals.data = data;
     return next();
   } catch (err) {
@@ -63,6 +74,7 @@ userController.createUser = async (req, res, next) => {
     });
   }
 };
+
 
 /**
  * @name userController.setSSIDCookie
