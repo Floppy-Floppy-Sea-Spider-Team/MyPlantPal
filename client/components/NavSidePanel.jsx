@@ -1,13 +1,4 @@
-/**
- * ************************************
- *
- * @module  NavSidePanel
- * @authors Preston Coldwell, John Le, Christopher Le, Geoffrey Sun, Brandon Chmiel
- * @date 08/18/2023
- * @description Navigation panel for use on relevant pages, and the navigate method to switch between different routes. Defunct.
- *
- * ************************************
- */
+
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -7,7 +7,7 @@ import {loadAllPlantsActionCreator} from '../actions/actions.js'
 
 //Main function to render the plant display box
 const PlantDisplay = () => {
-
+  const dispatch=useDispatch()
   //One time on load of page render the users plants
   useEffect(() => {
     loadPlants();
@@ -19,18 +19,17 @@ const PlantDisplay = () => {
     try {
       const data = await fetch('http://localhost:8080/leaf/plant/getPlants')
       const totPlantList = await data.json(); 
-      const dispatch=useDispatch()
       dispatch((loadAllPlantsActionCreator(totPlantList)));
       } catch (error) {
         console.log(error);
       } 
     }
-    let currPlants=useSelector(state=>state.plantList)
+    let currPlants=useSelector(state=>state.plants.plantList)
 
   return (
     <div className='plantDisplay'>
       {currPlants.map((plant) => (
-        <PlantCard key={plant.id} plantName={plant.name} species={plant.species} lastWatered={plant.lastWatered} frequency={plant.frequency} cycle={plant.cycle} lastPotted={plant.lastPotted} sunlight={plant.sunlight} dateAdded={plant.dateAdded} photo={plant.photo}/>
+        <PlantCard key={plant.id} plantName={plant.name} species={plant.species} lastWatered={plant.lastWatered} frequency={plant.frequency} cycle={plant.cycle} lastPotted={plant.lastPotted} sunlight={plant.sunlight}  photo={plant.photo}/>
       ))}
     </div>
   );

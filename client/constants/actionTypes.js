@@ -12,5 +12,5 @@ export const UPDATE_PLANT = 'UPDATE_PLANT';
 export const LOAD_PLANT = 'LOAD_PLANT';
 export const DELETE_PLANT = 'DELETE_PLANT';
 export const CREATE_PLANT = 'CREATE_PLANT';
-export const CREATE_APIDATA = 'CREATE_APIDATA';
+export const SELECT_API = 'SELECT_API';
 export const FETCH_PLANT = 'FETCH_PLANT';

@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
+  devtool: 'source-map',
   mode: process.env.NODE_ENV,
   module: {
     rules: [{
